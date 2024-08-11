@@ -1,0 +1,4 @@
+## These are separate problems on recursion
+___
+
+1. Reverse a given stack using recursion.
