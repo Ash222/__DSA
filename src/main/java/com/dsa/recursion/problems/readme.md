@@ -2,3 +2,4 @@
 ___
 
 1. Reverse a given stack using recursion.
+2. Tower of Hanoi.
