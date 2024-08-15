@@ -13,10 +13,23 @@ ___
    rat can be travel through it.
    Note: In a path, no cell can be visited more than one time. If the source cell is 0, the rat cannot move to any other
    cell. In case of no path, return an empty list. The driver will output "-1" automatically.
-   Input: mat[][] = [
+   
+   ***Input*** : mat[][] = [
        [1, 0, 0, 0],
        [1, 1, 0, 1],
        [1, 1, 0, 0],
        [0, 1, 1, 1]
    ]
-   Output: ["DDRDRR", "DRDDRR"]
+
+   ***Output*** : ["DDRDRR", "DRDDRR"]
+
+6. You are given a Binary Search Tree (BST) with n nodes, each node has a distinct value assigned to it. The goal is 
+   to flatten the tree such that, the left child of each element points to nothing (NULL), and the right child points 
+   to the next element in the sorted list of elements of the BST (look at the examples for clarity). 
+   You must accomplish this without using any extra storage, except for recursive calls, which are allowed.
+   Note: If your BST does have a left child, then the system will print a -1 and will skip it, resulting in an 
+   incorrect solution.
+
+   ***Input*** : 5 3 7 2 4 6 8
+
+   ***Output*** : 2 3 4 5 6 7 8
