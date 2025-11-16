@@ -70,8 +70,20 @@ public class Solve {
 		return true;
 	}
 
+	private static boolean approach3(final ListNode head, final ListNode[] currentArr) {
+		if (Objects.isNull(head)) {
+			return true;
+		}
+		final boolean isPalindrome = approach3(head.next, currentArr);
+		if (currentArr[0].val != head.val) {
+			return false;
+		}
+		currentArr[0] = currentArr[0].next;
+		return isPalindrome;
+	}
+
 	private static boolean isPalindrome(final ListNode head) {
-		return approach2(head);
+		return approach3(head, new ListNode[]{head});
 	}
 
 	static void main() {
