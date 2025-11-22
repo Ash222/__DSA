@@ -57,6 +57,7 @@ public class DetectCycle {
 		visited[startingNode] = true;
 
 		while (!queue.isEmpty()) {
+
 			final Pair pair = queue.poll();
 			final int parentNode = pair.parentNode;
 			final int node = pair.node;
