@@ -1,6 +1,8 @@
 package com.dsa.graph.concept;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DetectCycleDirected {
@@ -49,8 +51,46 @@ public class DetectCycleDirected {
 		return false;
 	}
 
-	private static boolean isCycle(final int[][] edges, final int vertices,
+	// this is nothing but kahn algorithm tweak
+	private static boolean isCycleBFS(final List<List<Integer>> adjacencyList,
+			final int vertices) {
+
+		final int[] inDegree = new int[vertices + 1];
+		final Deque<Integer> q = new LinkedList<>();
+		int countVisitedNode = 0;
+
+		for (int u = 1; u <= vertices; u++) {
+			for (final int v : adjacencyList.get(u)) {
+				inDegree[v]++;
+			}
+		}
+
+		for (int u = 1; u <= vertices; u++) {
+			if (inDegree[u] == 0) {
+				q.offer(u);
+			}
+		}
+
+		while (!q.isEmpty()) {
+
+			final int currentNode = q.poll();
+
+			for (final int adjacentNode : adjacencyList.get(currentNode)) {
+
+				inDegree[adjacentNode]--;
+				if (inDegree[adjacentNode] == 0) {
+					q.offer(adjacentNode);
+					countVisitedNode++;
+				}
+			}
+		}
+
+		return countVisitedNode == vertices;
+	}
+
+	private static boolean isCycleDFS(final int[][] edges, final int vertices,
 			final int numberOfEdges) {
+
 		final List<List<Integer>> adjacencyList = createAdjList(edges, vertices);
 		final boolean[] visited = new boolean[vertices + 1];
 		final boolean[] inRecursion = new boolean[vertices + 1];
@@ -64,11 +104,18 @@ public class DetectCycleDirected {
 		return false;
 	}
 
+	private static boolean isCycleBFS(final int[][] edges, final int vertices,
+			final int numberOfEdges) {
+
+		final List<List<Integer>> adjacencyList = createAdjList(edges, vertices);
+		return isCycleBFS(adjacencyList, vertices);
+	}
+
 	static void main() {
 		final int[][] edges = {{1, 2}, {2, 3}, {3, 1}};
 		final int N = 3; // number of vertices
 		final int M = 3; // number of edges
-		final boolean isCycle = isCycle(edges, N, M);
+		final boolean isCycle = isCycleBFS(edges, N, M);
 		System.out.println("DetectCycleDirected :: main :: isCycle ::: " + isCycle);
 	}
 }
